@@ -94,11 +94,12 @@ class UKBankHolidays
      * @return DateTimeInterface
      * @throws TooFarInFutureException
      * @throws \JsonException
-     * @TODO optimise this so it's not calling isBankHoliday every iteration
      */
     public function nextBankHoliayFrom(\DateTimeInterface $date): DateTimeInterface
     {
         $nextHoliday = $this->cloneDateTime($date);
+
+        $all_holidays = $this->getAllHolidays();
 
         $iterations = 0;
 
@@ -109,7 +110,7 @@ class UKBankHolidays
             }
 
         } while (
-            !$this->isBankHoliday($nextHoliday)
+            !in_array($this->region->getRegion() . '-' . $nextHoliday->format('Y-m-d'), $all_holidays, true)
         );
 
         return $nextHoliday;
