@@ -10,8 +10,9 @@ cache:
 matrix:
     fast_finish: true
 
-before_install:
-    - composer selfupdate
+install:
+    - flags="--ansi --prefer-dist --no-interaction --optimize-autoloader --no-progress"
+    - composer install $flags
 
 script:
-    - ./vendor/bin/phpunit --testdox
+    - ./bin/phpunit --testdox
