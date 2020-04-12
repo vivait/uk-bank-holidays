@@ -65,3 +65,4 @@ fabric.properties
 
 
 /bin
+.phpunit.result.cache
